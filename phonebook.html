@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الهاتف</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <button class="nav-btn active" data-page="home">🏠 الرئيسية</button>
+            <button class="nav-btn" data-page="favorites">⭐ المفضلة</button>
+            <button class="nav-btn" data-page="about">ℹ️ عن المشروع</button>
+        </nav>
+
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+            <header>
+                <h1>📱 دليل الهاتف</h1>
+                <p>إدارة جهات الاتصال الخاصة بك بسهولة</p>
+            </header>
+
+            <div class="search-section">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="ابحث عن اسم أو رقم هاتف..."
+                    class="search-box"
+                >
+            </div>
+
+            <div class="filter-section">
+                <button class="filter-btn active" data-filter="الكل">الكل</button>
+                <button class="filter-btn" data-filter="عائلة">عائلة</button>
+                <button class="filter-btn" data-filter="أصدقاء">أصدقاء</button>
+                <button class="filter-btn" data-filter="عمل">عمل</button>
+            </div>
+
+            <button class="add-btn" id="openAddForm">➕ إضافة جهة اتصال</button>
+
+            <!-- Form لإضافة جهة اتصال -->
+            <div id="addFormModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>إضافة جهة اتصال جديدة</h2>
+                    <form id="addContactForm">
+                        <input type="text" id="newName" placeholder="الاسم" required>
+                        <input type="tel" id="newPhone" placeholder="رقم الهاتف" required>
+                        <input type="email" id="newEmail" placeholder="البريد الإلكتروني" required>
+                        <select id="newCategory" required>
+                            <option value="">اختر الفئة</option>
+                            <option value="عائلة">عائلة</option>
+                            <option value="أصدقاء">أصدقاء</option>
+                            <option value="عمل">عمل</option>
+                        </select>
+                        <button type="submit" class="submit-btn">إضافة</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="contactsList" class="contacts-list">
+                <!-- سيتم ملء جهات الاتصال هنا بواسطة JavaScript -->
+            </div>
+
+            <div class="stats">
+                <p>عدد جهات الاتصال المعروضة: <span id="count">0</span></p>
+            </div>
+        </div>
+
+        <!-- Favorites Page -->
+        <div id="favoritesPage" class="page">
+            <header>
+                <h1>⭐ جهات الاتصال المفضلة</h1>
+                <p>جهات الاتصال التي وضعتها كمفضلة</p>
+            </header>
+
+            <div id="favoritesList" class="contacts-list">
+                <!-- سيتم ملء المفضلة هنا -->
+            </div>
+
+            <div class="stats">
+                <p>عدد المفضلة: <span id="favCount">0</span></p>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="aboutPage" class="page">
+            <header>
+                <h1>ℹ️ عن المشروع</h1>
+            </header>
+
+            <div class="about-content">
+                <div class="about-card">
+                    <h2>📚 معلومات المشروع</h2>
+                    <p><strong>اسم المشروع:</strong> دليل الهاتف البسيط</p>
+                    <p><strong>المادة:</strong> مشروع مادة ويب</p>
+                    <p><strong>الفئة المستهدفة:</strong> طلبة علوم حاسب</p>
+                    <p><strong>التقنيات المستخدمة:</strong> HTML, CSS, JavaScript</p>
+                </div>
+
+                <div class="about-card">
+                    <h2>👥 أعضاء الفريق</h2>
+                    <table class="team-table">
+                        <tr>
+                            <th>الاسم</th>
+                            <th>الرقم الجامعي</th>
+                        </tr>
+                        <tr>
+                            <td>Fares</td>
+                            <td>[ ]</td>
+                        </tr>
+                        <tr>
+                            <td>Ahmed</td>
+                            <td>[ ]</td>
+                        </tr>
+                        <tr>
+                            <td>Sally</td>
+                            <td>[ ]</td>
+                        </tr>
+                        <tr>
+                            <td>Walid</td>
+                            <td>[ ]</td>
+                        </tr>
+                        <tr>
+                            <td>Hady</td>
+                            <td>[ ]</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="about-card">
+                    <h2>✨ المميزات</h2>
+                    <ul>
+                        <li>✅ عرض جهات الاتصال</li>
+                        <li>✅ بحث فوري</li>
+                        <li>✅ تصفية حسب الفئات</li>
+                        <li>✅ إضافة جهات اتصال جديدة</li>
+                        <li>✅ حذف جهات اتصال</li>
+                        <li>✅ إضافة إلى المفضلة</li>
+                        <li>✅ تصميم متجاوب</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
