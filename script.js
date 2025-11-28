@@ -1,20 +1,21 @@
 // بيانات جهات الاتصال
 let contacts = [
-    { id: 1, name: "أحمد محمد", phone: "+966501234567", email: "ahmed@example.com", category: "عائلة", favorite: false },
-    { id: 2, name: "فاطمة علي", phone: "+966502345678", email: "fatima@example.com", category: "أصدقاء", favorite: false },
-    { id: 3, name: "محمود سالم", phone: "+966503456789", email: "mahmoud@example.com", category: "عمل", favorite: false },
-    { id: 4, name: "نور الدين", phone: "+966504567890", email: "noor@example.com", category: "عائلة", favorite: false },
-    { id: 5, name: "ليلى حسن", phone: "+966505678901", email: "layla@example.com", category: "أصدقاء", favorite: false },
-    { id: 6, name: "خالد إبراهيم", phone: "+966506789012", email: "khaled@example.com", category: "عمل", favorite: false },
-    { id: 7, name: "سارة محمود", phone: "+966507890123", email: "sarah@example.com", category: "أصدقاء", favorite: false },
-    { id: 8, name: "عمر فارس", phone: "+966508901234", email: "omar@example.com", category: "عمل", favorite: false },
-    { id: 9, name: "مريم أحمد", phone: "+966509012345", email: "maryam@example.com", category: "عائلة", favorite: false },
-    { id: 10, name: "يوسف علي", phone: "+966510123456", email: "youssef@example.com", category: "أصدقاء", favorite: false }
+    { id: 1, name: "أحمد محمد", title: "الأخ", job: "مهندس", phone: "+966501234567", email: "ahmed@example.com", category: "عائلة", favorite: false },
+    { id: 2, name: "فاطمة علي", title: "الأخت", job: "معلمة", phone: "+966502345678", email: "fatima@example.com", category: "أصدقاء", favorite: false },
+    { id: 3, name: "محمود سالم", title: "المدير", job: "مدير مبيعات", phone: "+966503456789", email: "mahmoud@example.com", category: "عمل", favorite: false },
+    { id: 4, name: "نور الدين", title: "العم", job: "طبيب", phone: "+966504567890", email: "noor@example.com", category: "عائلة", favorite: false },
+    { id: 5, name: "ليلى حسن", title: "الصديقة", job: "مبرمجة", phone: "+966505678901", email: "layla@example.com", category: "أصدقاء", favorite: false },
+    { id: 6, name: "خالد إبراهيم", title: "مسؤول", job: "مسؤول مشروع", phone: "+966506789012", email: "khaled@example.com", category: "عمل", favorite: false },
+    { id: 7, name: "سارة محمود", title: "الصديقة", job: "ترجمة", phone: "+966507890123", email: "sarah@example.com", category: "أصدقاء", favorite: false },
+    { id: 8, name: "عمر فارس", title: "الزميل", job: "محللل بيانات", phone: "+966508901234", email: "omar@example.com", category: "عمل", favorite: false },
+    { id: 9, name: "مريم أحمد", title: "العمة", job: "مربية", phone: "+966509012345", email: "maryam@example.com", category: "عائلة", favorite: false },
+    { id: 10, name: "يوسف علي", title: "الصديق", job: "معمار", phone: "+966510123456", email: "youssef@example.com", category: "أصدقاء", favorite: false }
 ];
 
 let selectedCategory = "الكل";
 let searchTerm = "";
 let nextId = 11;
+let editingId = null;
 
 // عناصر الـ DOM
 const searchInput = document.getElementById("searchInput");
@@ -29,6 +30,9 @@ const addContactForm = document.getElementById("addContactForm");
 const closeBtn = document.querySelector(".close");
 const favoritesList = document.getElementById("favoritesList");
 const favCount = document.getElementById("favCount");
+const formTitle = document.getElementById("formTitle");
+const submitBtn = document.getElementById("submitBtn");
+const editId = document.getElementById("editId");
 
 // حفظ البيانات في Local Storage
 function saveContacts() {
@@ -96,24 +100,49 @@ window.addEventListener("click", function(e) {
     }
 });
 
-// إضافة جهة اتصال جديدة
+// إضافة/تعديل جهة اتصال
 addContactForm.addEventListener("submit", function(e) {
     e.preventDefault();
     
-    const newContact = {
-        id: nextId++,
-        name: document.getElementById("newName").value,
-        phone: document.getElementById("newPhone").value,
-        email: document.getElementById("newEmail").value,
-        category: document.getElementById("newCategory").value,
-        favorite: false
-    };
-
-    contacts.push(newContact);
-    saveContacts();
+    const name = document.getElementById("newName").value;
+    const title = document.getElementById("newTitle").value;
+    const job = document.getElementById("newJob").value;
+    const phone = document.getElementById("newPhone").value;
+    const email = document.getElementById("newEmail").value;
+    const category = document.getElementById("newCategory").value;
     
+    if (editingId) {
+        // تعديل
+        const contact = contacts.find(c => c.id === editingId);
+        if (contact) {
+            contact.name = name;
+            contact.title = title;
+            contact.job = job;
+            contact.phone = phone;
+            contact.email = email;
+            contact.category = category;
+        }
+        editingId = null;
+    } else {
+        // إضافة
+        const newContact = {
+            id: nextId++,
+            name: name,
+            title: title,
+            job: job,
+            phone: phone,
+            email: email,
+            category: category,
+            favorite: false
+        };
+        contacts.push(newContact);
+    }
+
+    saveContacts();
     addContactForm.reset();
     addFormModal.classList.remove("show");
+    formTitle.textContent = "إضافة جهة اتصال جديدة";
+    submitBtn.textContent = "إضافة";
     
     // العودة إلى الصفحة الرئيسية
     navButtons[0].click();
@@ -145,6 +174,7 @@ function displayContacts() {
     contactsList.innerHTML = filtered.map(contact => `
         <div class="contact-card ${contact.favorite ? 'favorite' : ''}">
             <div class="contact-name">${contact.name}</div>
+            <div class="contact-subtitle">${contact.title} - ${contact.job}</div>
             <div class="contact-category">${contact.category}</div>
             <div class="contact-info">
                 <strong>📱 الهاتف:</strong><br>
@@ -155,6 +185,7 @@ function displayContacts() {
                 <a href="mailto:${contact.email}" class="contact-email">${contact.email}</a>
             </div>
             <div class="contact-actions">
+                <button class="action-btn edit-btn" onclick="editContact(${contact.id})">✍️ تعديل</button>
                 <button class="action-btn favorite-btn ${contact.favorite ? 'active' : ''}" onclick="toggleFavorite(${contact.id})">
                     ${contact.favorite ? '❤️ مفضل' : '🤍 إضافة'}
                 </button>
@@ -179,6 +210,7 @@ function displayFavorites() {
     favoritesList.innerHTML = favorites.map(contact => `
         <div class="contact-card favorite">
             <div class="contact-name">${contact.name}</div>
+            <div class="contact-subtitle">${contact.title} - ${contact.job}</div>
             <div class="contact-category">${contact.category}</div>
             <div class="contact-info">
                 <strong>📱 الهاتف:</strong><br>
@@ -189,6 +221,7 @@ function displayFavorites() {
                 <a href="mailto:${contact.email}" class="contact-email">${contact.email}</a>
             </div>
             <div class="contact-actions">
+                <button class="action-btn edit-btn" onclick="editContact(${contact.id})">✍️ تعديل</button>
                 <button class="action-btn favorite-btn active" onclick="toggleFavorite(${contact.id})">
                     ❤️ إزالة من المفضلة
                 </button>
@@ -198,6 +231,25 @@ function displayFavorites() {
     `).join("");
 
     favCount.textContent = favorites.length;
+}
+
+// دالة تعديل جهة اتصال
+function editContact(id) {
+    const contact = contacts.find(c => c.id === id);
+    if (contact) {
+        editingId = id;
+        document.getElementById("newName").value = contact.name;
+        document.getElementById("newTitle").value = contact.title;
+        document.getElementById("newJob").value = contact.job;
+        document.getElementById("newPhone").value = contact.phone;
+        document.getElementById("newEmail").value = contact.email;
+        document.getElementById("newCategory").value = contact.category;
+        
+        formTitle.textContent = "تعديل جهة اتصال";
+        submitBtn.textContent = "حفظ التغييرات";
+        
+        addFormModal.classList.add("show");
+    }
 }
 
 // دالة حذف جهة اتصال
