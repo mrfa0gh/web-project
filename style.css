@@ -180,10 +180,11 @@ header p {
 
 .contact-actions {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px solid #ddd;
+    flex-wrap: wrap;
 }
 
 .action-btn {
@@ -192,8 +193,17 @@ header p {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.9em;
+    font-size: 0.85em;
     transition: all 0.3s;
+}
+
+.edit-btn {
+    background: #17a2b8;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: #138496;
 }
 
 .favorite-btn {
@@ -222,7 +232,14 @@ header p {
     font-size: 1.3em;
     font-weight: bold;
     color: #333;
+    margin-bottom: 5px;
+}
+
+.contact-subtitle {
+    font-size: 0.95em;
+    color: #667eea;
     margin-bottom: 10px;
+    font-style: italic;
 }
 
 .contact-category {
