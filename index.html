@@ -48,12 +48,49 @@
                             <option value="عمل">عمل</option>
                         </select>
                         <button id="addBtn" class="btn btn-primary">➕ إضافة</button>
+                        <button id="selectBtn" class="btn btn-secondary">☑️ تحديد</button>
+                        <button id="deleteAllBtn" class="btn btn-danger">🗑️ حذف الكل</button>
+                    </div>
+                    <!-- Bulk Actions Panel -->
+                    <div id="bulkActionsPanel" class="bulk-actions-panel hidden">
+                        <div class="bulk-info">
+                            <span id="selectedCount">تم تحديد 0</span>
+                            <button id="cancelSelectBtn" class="btn btn-secondary">إلغاء</button>
+                        </div>
+                        <div class="bulk-buttons">
+                            <button id="bulkAddFavoriteBtn" class="btn btn-info">❤️ إضافة للمفضلة</button>
+                            <button id="bulkRemoveFavoriteBtn" class="btn btn-info">🤍 إزالة من المفضلة</button>
+                            <button id="bulkDeleteBtn" class="btn btn-danger">🗑️ حذف المحددة</button>
+                            <button id="bulkEditBtn" class="btn btn-warning">✏️ تعديل جماعي</button>
+                        </div>
                     </div>
                     <div id="contactsList" class="contacts-list"></div>
                 </div>
 
                 <!-- Favorites Tab -->
                 <div id="favorites" class="tab">
+                    <div class="controls">
+                        <input type="text" id="searchFavorites" placeholder="🔍 ابحث عن جهة مفضلة..." class="search-input">
+                        <select id="categoryFilterFavorites" class="filter-select">
+                            <option value="الكل">الكل</option>
+                            <option value="عائلة">عائلة</option>
+                            <option value="أصدقاء">أصدقاء</option>
+                            <option value="عمل">عمل</option>
+                        </select>
+                        <button id="selectBtnFavorites" class="btn btn-secondary">☑️ تحديد</button>
+                        <button id="deleteFavoritesBtn" class="btn btn-danger">🗑️ حذف المفضلة</button>
+                    </div>
+                    <!-- Bulk Actions Panel for Favorites -->
+                    <div id="bulkActionsPanelFavorites" class="bulk-actions-panel hidden">
+                        <div class="bulk-info">
+                            <span id="selectedCountFavorites">تم تحديد 0</span>
+                            <button id="cancelSelectBtnFavorites" class="btn btn-secondary">إلغاء</button>
+                        </div>
+                        <div class="bulk-buttons">
+                            <button id="bulkRemoveFavoriteBtnFav" class="btn btn-danger">🤍 إزالة من المفضلة</button>
+                            <button id="bulkDeleteBtnFav" class="btn btn-danger">🗑️ حذف المحددة</button>
+                        </div>
+                    </div>
                     <div id="favoritesList" class="contacts-list"></div>
                 </div>
 
