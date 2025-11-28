@@ -3,150 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل الهاتف</title>
+    <title>دليل الهاتف - Phone Book</title>
     <link rel="stylesheet" href="style.css">
+    <script src="data.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <button class="nav-btn active" data-page="home">🏠 الرئيسية</button>
-            <button class="nav-btn" data-page="favorites">⭐ المفضلة</button>
-            <button class="nav-btn" data-page="about">ℹ️ عن المشروع</button>
-        </nav>
+    <div class="app">
+        <!-- Splash Screen -->
+        <div id="splash" class="splash">
+            <div class="splash-content">
+                <div class="logo-circle">📱</div>
+                <h1>دليل الهاتف</h1>
+                <p class="subtitle">Phone Book</p>
+                <p class="description">تطبيق إدارة جهات الاتصال الذكي</p>
+                <button id="enterBtn" class="enter-btn">ابدأ الآن</button>
+            </div>
+        </div>
 
-        <!-- Home Page -->
-        <div id="homePage" class="page active">
-            <header>
+        <!-- Main App -->
+        <div id="mainApp" class="main-app hidden">
+            <!-- Header -->
+            <header class="header">
                 <h1>📱 دليل الهاتف</h1>
-                <p>إدارة جهات الاتصال الخاصة بك بسهولة</p>
+                <p>إدارة جهات الاتصال بسهولة</p>
             </header>
 
-            <div class="search-section">
-                <input 
-                    type="text" 
-                    id="searchInput" 
-                    placeholder="ابحث عن اسم أو رقم هاتف..."
-                    class="search-box"
-                >
-            </div>
+            <!-- Navigation -->
+            <nav class="navbar">
+                <button class="nav-btn active" data-tab="contacts">📋 جهات الاتصال</button>
+                <button class="nav-btn" data-tab="favorites">⭐ المفضلة</button>
+                <button class="nav-btn" data-tab="about">ℹ️ عن المشروع</button>
+            </nav>
 
-            <div class="filter-section">
-                <button class="filter-btn active" data-filter="الكل">الكل</button>
-                <button class="filter-btn" data-filter="عائلة">عائلة</button>
-                <button class="filter-btn" data-filter="أصدقاء">أصدقاء</button>
-                <button class="filter-btn" data-filter="عمل">عمل</button>
-            </div>
-
-            <button class="add-btn" id="openAddForm">➕ إضافة جهة اتصال</button>
-
-            <!-- Form لإضافة/تعديل جهة اتصال -->
-            <div id="addFormModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h2 id="formTitle">إضافة جهة اتصال جديدة</h2>
-                    <form id="addContactForm">
-                        <input type="hidden" id="editId">
-                        <input type="text" id="newName" placeholder="الاسم" required>
-                        <input type="text" id="newTitle" placeholder="اللقب" required>
-                        <input type="text" id="newJob" placeholder="الوظيفة" required>
-                        <input type="tel" id="newPhone" placeholder="رقم الهاتف" required>
-                        <input type="email" id="newEmail" placeholder="البريد الإلكتروني" required>
-                        <select id="newCategory" required>
-                            <option value="">اختر الفئة</option>
+            <!-- Content -->
+            <div class="content">
+                <!-- Contacts Tab -->
+                <div id="contacts" class="tab active">
+                    <div class="controls">
+                        <input type="text" id="search" placeholder="🔍 ابحث عن جهة اتصال..." class="search-input">
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="الكل">الكل</option>
                             <option value="عائلة">عائلة</option>
                             <option value="أصدقاء">أصدقاء</option>
                             <option value="عمل">عمل</option>
                         </select>
-                        <button type="submit" class="submit-btn" id="submitBtn">إضافة</button>
-                    </form>
-                </div>
-            </div>
-
-            <div id="contactsList" class="contacts-list">
-                <!-- سيتم ملء جهات الاتصال هنا بواسطة JavaScript -->
-            </div>
-
-            <div class="stats">
-                <p>عدد جهات الاتصال المعروضة: <span id="count">0</span></p>
-            </div>
-        </div>
-
-        <!-- Favorites Page -->
-        <div id="favoritesPage" class="page">
-            <header>
-                <h1>⭐ جهات الاتصال المفضلة</h1>
-                <p>جهات الاتصال التي وضعتها كمفضلة</p>
-            </header>
-
-            <div id="favoritesList" class="contacts-list">
-                <!-- سيتم ملء المفضلة هنا -->
-            </div>
-
-            <div class="stats">
-                <p>عدد المفضلة: <span id="favCount">0</span></p>
-            </div>
-        </div>
-
-        <!-- About Page -->
-        <div id="aboutPage" class="page">
-            <header>
-                <h1>ℹ️ عن المشروع</h1>
-            </header>
-
-            <div class="about-content">
-                <div class="about-card">
-                    <h2>📚 معلومات المشروع</h2>
-                    <p><strong>اسم المشروع:</strong> دليل الهاتف البسيط</p>
-                    <p><strong>المادة:</strong> مشروع مادة ويب</p>
-                    <p><strong>الفئة المستهدفة:</strong> طلبة علوم حاسب</p>
-                    <p><strong>التقنيات المستخدمة:</strong> HTML, CSS, JavaScript</p>
+                        <button id="addBtn" class="btn btn-primary">➕ إضافة</button>
+                    </div>
+                    <div id="contactsList" class="contacts-list"></div>
                 </div>
 
-                <div class="about-card">
-                    <h2>👥 أعضاء الفريق</h2>
-                    <table class="team-table">
-                        <tr>
-                            <th>الاسم</th>
-                            <th>الرقم الجامعي</th>
-                        </tr>
-                        <tr>
-                            <td>Fares</td>
-                            <td>[ ]</td>
-                        </tr>
-                        <tr>
-                            <td>Ahmed</td>
-                            <td>[ ]</td>
-                        </tr>
-                        <tr>
-                            <td>Sally</td>
-                            <td>[ ]</td>
-                        </tr>
-                        <tr>
-                            <td>Walid</td>
-                            <td>[ ]</td>
-                        </tr>
-                        <tr>
-                            <td>Hady</td>
-                            <td>[ ]</td>
-                        </tr>
-                    </table>
+                <!-- Favorites Tab -->
+                <div id="favorites" class="tab">
+                    <div id="favoritesList" class="contacts-list"></div>
                 </div>
 
-                <div class="about-card">
-                    <h2>✨ المميزات</h2>
-                    <ul>
-                        <li>✅ عرض جهات الاتصال</li>
-                        <li>✅ بحث فوري</li>
-                        <li>✅ تصفية حسب الفئات</li>
-                        <li>✅ إضافة جهات اتصال جديدة</li>
-                        <li>✅ حذف جهات اتصال</li>
-                        <li>✅ إضافة إلى المفضلة</li>
-                        <li>✅ تصميم متجاوب</li>
-                    </ul>
+                <!-- About Tab -->
+                <div id="about" class="tab">
+                    <div class="about-content">
+                        <div class="about-card">
+                            <h2>📋 معلومات المشروع</h2>
+                            <p><strong>اسم المشروع:</strong> دليل الهاتف</p>
+                            <p><strong>المادة:</strong> تكنولوجيا الويب</p>
+                            <p><strong>التقنيات:</strong> HTML, CSS, JavaScript, MySQL</p>
+                            <br>
+                            <h2>الإشراف الأكاديمي</h2>
+                            <p><strong>تحت إشراف:</strong> د/ مروة عناني</p>
+                            <p><strong>مساعد:</strong> م/ علي محمد</p>
+                        </div>
+                        <div class="about-card">
+                            <h2>👥 فريق العمل</h2>
+                            <table class="team-table">
+                                <tr>
+                                    <th>الاسم</th>
+                                    <th>الرقم الجامعي</th>
+                                </tr>
+                                <tr>
+                                    <td>فارس محمد عبدالسميع</td>
+                                    <td>231255</td>
+                                </tr>
+                                <tr>
+                                    <td>محمود اسامه سعد محمد</td>
+                                    <td>231543</td>
+                                </tr>
+                                <tr>
+                                    <td>حسن اشرف احمد علي محمد</td>
+                                    <td>222287</td>
+                                </tr>
+                                <tr>
+                                    <td>محمد كرم حمدي عبد المعبود</td>
+                                    <td>231446</td>
+                                </tr>
+                                <tr>
+                                    <td>احمد محمد فؤاد محمود</td>
+                                    <td>230573</td>
+                                </tr>
+                                <tr>
+                                    <td>محمد عاصم احمد</td>
+                                    <td>234354</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="about-card">
+                            <h2>✨ المميزات</h2>
+                            <ul>
+                                <li>✅ إضافة/تعديل/حذف جهات الاتصال</li>
+                                <li>✅ بحث فوري</li>
+                                <li>✅ تصفية حسب الفئات</li>
+                                <li>✅ إضافة للمفضلة</li>
+                                <li>✅ حفظ البيانات في Local Storage</li>
+                                <li>✅ ربط بقاعدة بيانات MySQL</li>
+                                <li>✅ تصميم متجاوب</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle">إضافة جهة اتصال</h2>
+                <form id="contactForm">
+                    <input type="hidden" id="contactId">
+                    <input type="text" id="firstName" placeholder="الاسم الأول" required>
+                    <input type="text" id="lastName" placeholder="الاسم الأخير" required>
+                    <input type="text" id="nickname" placeholder="الكنية/اللقب (اختياري)">
+                    <input type="text" id="jobTitle" placeholder="الوظيفة" required>
+                    <input type="tel" id="phone" placeholder="رقم الهاتف" required>
+                    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+                    <select id="category" required>
+                        <option value="">اختر الفئة</option>
+                        <option value="عائلة">عائلة</option>
+                        <option value="أصدقاء">أصدقاء</option>
+                        <option value="عمل">عمل</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div id="toast" class="toast hidden"></div>
     </div>
 
     <script src="script.js"></script>
