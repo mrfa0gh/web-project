@@ -40,13 +40,16 @@
 
             <button class="add-btn" id="openAddForm">➕ إضافة جهة اتصال</button>
 
-            <!-- Form لإضافة جهة اتصال -->
+            <!-- Form لإضافة/تعديل جهة اتصال -->
             <div id="addFormModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <h2>إضافة جهة اتصال جديدة</h2>
+                    <h2 id="formTitle">إضافة جهة اتصال جديدة</h2>
                     <form id="addContactForm">
+                        <input type="hidden" id="editId">
                         <input type="text" id="newName" placeholder="الاسم" required>
+                        <input type="text" id="newTitle" placeholder="اللقب" required>
+                        <input type="text" id="newJob" placeholder="الوظيفة" required>
                         <input type="tel" id="newPhone" placeholder="رقم الهاتف" required>
                         <input type="email" id="newEmail" placeholder="البريد الإلكتروني" required>
                         <select id="newCategory" required>
@@ -55,7 +58,7 @@
                             <option value="أصدقاء">أصدقاء</option>
                             <option value="عمل">عمل</option>
                         </select>
-                        <button type="submit" class="submit-btn">إضافة</button>
+                        <button type="submit" class="submit-btn" id="submitBtn">إضافة</button>
                     </form>
                 </div>
             </div>
