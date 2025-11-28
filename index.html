@@ -9,7 +9,6 @@
 </head>
 <body>
     <div class="app">
-        <!-- Splash Screen -->
         <div id="splash" class="splash">
             <div class="splash-content">
                 <div class="logo-circle">📱</div>
@@ -20,24 +19,19 @@
             </div>
         </div>
 
-        <!-- Main App -->
         <div id="mainApp" class="main-app hidden">
-            <!-- Header -->
             <header class="header">
                 <h1>📱 دليل الهاتف</h1>
                 <p>إدارة جهات الاتصال بسهولة</p>
             </header>
 
-            <!-- Navigation -->
             <nav class="navbar">
                 <button class="nav-btn active" data-tab="contacts">📋 جهات الاتصال</button>
                 <button class="nav-btn" data-tab="favorites">⭐ المفضلة</button>
                 <button class="nav-btn" data-tab="about">ℹ️ عن المشروع</button>
             </nav>
 
-            <!-- Content -->
             <div class="content">
-                <!-- Contacts Tab -->
                 <div id="contacts" class="tab active">
                     <div class="controls">
                         <input type="text" id="search" placeholder="🔍 ابحث عن جهة اتصال..." class="search-input">
@@ -51,23 +45,22 @@
                         <button id="selectBtn" class="btn btn-secondary">☑️ تحديد</button>
                         <button id="deleteAllBtn" class="btn btn-danger">🗑️ حذف الكل</button>
                     </div>
-                    <!-- Bulk Actions Panel -->
                     <div id="bulkActionsPanel" class="bulk-actions-panel hidden">
                         <div class="bulk-info">
                             <span id="selectedCount">تم تحديد 0</span>
                             <button id="cancelSelectBtn" class="btn btn-secondary">إلغاء</button>
                         </div>
                         <div class="bulk-buttons">
+                            <button id="selectAllBtn" class="btn btn-info">✅ تحديد الكل</button>
+                            <button id="deselectAllBtn" class="btn btn-secondary">❌ إلغاء تحديد الكل</button>
                             <button id="bulkAddFavoriteBtn" class="btn btn-info">❤️ إضافة للمفضلة</button>
                             <button id="bulkRemoveFavoriteBtn" class="btn btn-info">🤍 إزالة من المفضلة</button>
-                            <button id="bulkDeleteBtn" class="btn btn-danger">🗑️ حذف المحددة</button>
                             <button id="bulkEditBtn" class="btn btn-warning">✏️ تعديل جماعي</button>
                         </div>
                     </div>
                     <div id="contactsList" class="contacts-list"></div>
                 </div>
 
-                <!-- Favorites Tab -->
                 <div id="favorites" class="tab">
                     <div class="controls">
                         <input type="text" id="searchFavorites" placeholder="🔍 ابحث عن جهة مفضلة..." class="search-input">
@@ -78,23 +71,21 @@
                             <option value="عمل">عمل</option>
                         </select>
                         <button id="selectBtnFavorites" class="btn btn-secondary">☑️ تحديد</button>
-                        <button id="deleteFavoritesBtn" class="btn btn-danger">🗑️ حذف المفضلة</button>
-                    </div>
-                    <!-- Bulk Actions Panel for Favorites -->
+                        </div>
                     <div id="bulkActionsPanelFavorites" class="bulk-actions-panel hidden">
                         <div class="bulk-info">
                             <span id="selectedCountFavorites">تم تحديد 0</span>
                             <button id="cancelSelectBtnFavorites" class="btn btn-secondary">إلغاء</button>
                         </div>
                         <div class="bulk-buttons">
+                            <button id="selectAllBtnFav" class="btn btn-info">✅ تحديد الكل</button>
+                            <button id="deselectAllBtnFav" class="btn btn-secondary">❌ إلغاء تحديد الكل</button>
                             <button id="bulkRemoveFavoriteBtnFav" class="btn btn-danger">🤍 إزالة من المفضلة</button>
-                            <button id="bulkDeleteBtnFav" class="btn btn-danger">🗑️ حذف المحددة</button>
                         </div>
                     </div>
                     <div id="favoritesList" class="contacts-list"></div>
                 </div>
 
-                <!-- About Tab -->
                 <div id="about" class="tab">
                     <div class="about-content">
                         <div class="about-card">
@@ -134,10 +125,6 @@
                                     <td>احمد محمد فؤاد محمود</td>
                                     <td>230573</td>
                                 </tr>
-                                <tr>
-                                    <td>محمد عاصم احمد</td>
-                                    <td>234354</td>
-                                </tr>
                             </table>
                         </div>
                         <div class="about-card">
@@ -157,31 +144,64 @@
             </div>
         </div>
 
-        <!-- Modal -->
         <div id="modal" class="modal hidden">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2 id="modalTitle">إضافة جهة اتصال</h2>
-                <form id="contactForm">
+                <div class="modal-header">
+                    <h2 id="modalTitle">إضافة جهة اتصال</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="contactForm" class="modal-form">
                     <input type="hidden" id="contactId">
-                    <input type="text" id="firstName" placeholder="الاسم الأول" required>
-                    <input type="text" id="lastName" placeholder="الاسم الأخير" required>
-                    <input type="text" id="nickname" placeholder="الكنية/اللقب (اختياري)">
-                    <input type="text" id="jobTitle" placeholder="الوظيفة" required>
-                    <input type="tel" id="phone" placeholder="رقم الهاتف" required>
-                    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-                    <select id="category" required>
-                        <option value="">اختر الفئة</option>
-                        <option value="عائلة">عائلة</option>
-                        <option value="أصدقاء">أصدقاء</option>
-                        <option value="عمل">عمل</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary">حفظ</button>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">الاسم الأول</label>
+                            <input type="text" id="firstName" placeholder="الاسم الأول" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">الاسم الأخير</label>
+                            <input type="text" id="lastName" placeholder="الاسم الأخير" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nickname">الكنية/اللقب (اختياري)</label>
+                            <input type="text" id="nickname" placeholder="الكنية/اللقب">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobTitle">الوظيفة</label>
+                            <input type="text" id="jobTitle" placeholder="الوظيفة" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف</label>
+                            <input type="tel" id="phone" placeholder="رقم الهاتف" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="category">الفئة</label>
+                            <select id="category" required>
+                                <option value="">اختر الفئة</option>
+                                <option value="عائلة">عائلة</option>
+                                <option value="أصدقاء">أصدقاء</option>
+                                <option value="عمل">عمل</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">💾 حفظ</button>
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('modal').classList.add('hidden')">إلغاء</button>
+                    </div>
                 </form>
             </div>
         </div>
 
-        <!-- Toast -->
+
         <div id="toast" class="toast hidden"></div>
     </div>
 

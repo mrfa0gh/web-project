@@ -45,13 +45,11 @@ INSERT INTO categories (name, description) VALUES
 
 -- إدراج جهات الاتصال الافتراضية
 INSERT INTO contacts (name, phone, email, category_id, is_favorite) VALUES
-('فارس محمد عبدالسميع', '+20 100 123 4567', 'fares@example.com', 3, FALSE),
+('فارس محمد عبدالسميع', '+20 100 123 4567', 'ghalwash@mrfa0gh.run.place', 3, FALSE),
 ('محمود اسامه سعد محمد', '+20 100 234 5678', 'mahmoud@example.com', 2, FALSE),
 ('حسن اشرف احمد علي محمد', '+20 100 345 6789', 'hassan@example.com', 1, FALSE),
 ('محمد كرم حمدي عبد المعبود', '+20 100 456 7890', 'mohamad@example.com', 3, FALSE),
 ('احمد محمد فؤاد محمود', '+20 100 567 8901', 'ahmed@example.com', 2, FALSE),
-('محمد عاصم احمد', '+20 100 678 9012', 'asem@example.com', 3, FALSE);
-
 -- عرض جهات الاتصال مع الفئات
 SELECT 
     c.id,
